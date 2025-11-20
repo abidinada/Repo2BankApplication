@@ -1,0 +1,27 @@
+name: Java CI
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3   # checkout code
+
+      - uses: actions/setup-java@v3
+        with:
+          distribution: temurin
+          java-version: 17
+
+      - run: mvn clean test          # run tests
+
+      - run: mvn package             # build package
+
+      - uses: actions/upload-artifact@v3
+        with:
+          name: java-build
+          path: target/              # save artifact
