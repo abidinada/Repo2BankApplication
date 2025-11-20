@@ -1,6 +1,6 @@
 name: Java CI
 
-# Trigger the workflow on push to main branch
+# Trigger workflow on push to main branch
 on:
   push:
     branches:
@@ -11,28 +11,28 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      # Step 1: Checkout code
-      - name: Checkout repository
+      # Checkout repository code
+      - name: Checkout code
         uses: actions/checkout@v3
 
-      # Step 2: Set up JDK
+      # Set up JDK 17
       - name: Set up JDK 17
         uses: actions/setup-java@v3
         with:
           distribution: temurin
           java-version: 17
 
-      # Step 3: Run tests
-      - name: Run Maven tests
+      # Run Maven tests
+      - name: Run tests
         run: mvn clean test
 
-      # Step 4: Build package
+      # Build Maven package
       - name: Build package
         run: mvn package
 
-      # Step 5: Save target/ as artifact
+      # Upload target/ folder as artifact
       - name: Upload build artifact
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: java-build
           path: target/
